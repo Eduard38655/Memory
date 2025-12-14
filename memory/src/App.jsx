@@ -17,9 +17,9 @@ function App() {
   const [Data, SetData] = useState([])
   const DataImages = [CSS, HTML, Java, Node, JS, React]
   const [Movimientos, SetMoves] = useState(0)
-  const [Estado, SetEstado] = useState(null) // null = juego en curso, true = victoria, false = derrota
+  const [Estado, SetEstado] = useState(null)
   const [ShowBanner, SetBanner] = useState(false)
-  const [InitGame, SetGame] = useState(0) // tiempo restante
+  const [InitGame, SetGame] = useState(0)
   const timerRef = useRef(null)
 
   // Inicializar cartas
@@ -37,13 +37,14 @@ function App() {
     if (Data.length > 0 && matchedCards.length === Data.length) {
       clearInterval(timerRef.current)
       SetBanner(true)
-      SetEstado(true) // victoria
+      SetEstado(true)
     }
   }, [Data])
 
   // Manejar clic en carta
   function DatosCheck(itemid) {
-    if (Open.length >= 2) return
+    /*Si hay mas de 2 cartas abiertas el evento se cancela*/
+    if (Open.length >= 2) { return }
     SetOpen(prev => [...prev, itemid])
     SetMoves(prev => prev + 1)
 
@@ -84,19 +85,21 @@ function App() {
 
   // Iniciar juego
   function StarGame() {
+    /*Elimina el timer */
     clearInterval(timerRef.current)
     SetBanner(false)
     SetEstado(null)
     SetMoves(0)
     SetOpen([])
-    SetGame(100) // tiempo inicial
+    SetGame(100)
 
+    /*Iniciliza el timer */
     timerRef.current = setInterval(() => {
       SetGame(prev => {
         if (prev <= 1) {
           clearInterval(timerRef.current)
           SetBanner(true)
-          SetEstado(false) // derrota
+          SetEstado(false)
           return 0
         }
         return prev - 1
@@ -111,16 +114,14 @@ function App() {
     SetData(Filter)
   }
 
-  // Formatear tiempo mm:ss
+  // Funcion para manejar timer
   function formatTime(seconds) {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
+    return new Date(seconds * 1000).toISOString().slice(14, 19);
   }
 
   return (
     <main className={Styles.Main_Container}>
-      {/* Banner de victoria/derrota */}
+      {/* Banner de victoria - derrota */}
       <div className={ShowBanner ? Styles.Display_State : Styles.No_Display}>
         <div className={Styles.Box}>
 
@@ -146,7 +147,7 @@ function App() {
       <div className={Styles.Div_Estado}>
         <span><i className="fa-solid fa-bolt"></i> {Movimientos} Moves </span>
         <span><i className="fa-solid fa-hourglass-half"></i>{formatTime(InitGame)}</span>
-        <button onClick={StarGame} className={Styles.Reset_Button}><i className="fa-solid fa-arrow-rotate-right"></i>Star New Game</button>
+        <button onClick={StarGame} className={Styles.Reset_Button}><i className="fa-solid fa-arrow-rotate-right"></i>New Game</button>
         <ButtonsTheme />
       </div>
 
@@ -159,30 +160,30 @@ function App() {
                 <img src={img.src} alt="" />
               </div>
             ) : (
-              <div
-                onClick={
-                  InitGame
-                    ? () => {
-                      DatosCheck(img.id)
-                    }
-                    : undefined
-                }
-              >
+
+
+              <>
 
                 {img.flipped ? (
-                  <div className={Styles.Fronted}>
+                  <div className={Styles.Fronted} >
                     <img src={img.src} alt="" />
                   </div>
                 ) : (
                   <>
-                    <div className={Styles.display}>
+                    <div className={Styles.display} onClick={
+                      InitGame
+                        ? () => {
+                          DatosCheck(img.id)
+                        }
+                        : undefined
+                    }>
                       <img src={Brain_SVG} alt="" />
 
                     </div>
                   </>
                 )}
+              </>
 
-              </div>
             )}
           </div>
         ))}

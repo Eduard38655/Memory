@@ -6,7 +6,7 @@ function ButtonsTheme() {
 
   return (
     <button onClick={toggleTheme} className={Styles.Button_Change_theme}>
-       {theme === "dark" ? <i className="fa-solid fa-sun"></i> : <i className="fa-solid fa-moon"></i>}
+      {theme === "dark" ? <i className="fa-solid fa-sun"></i> : <i className="fa-solid fa-moon"></i>}
     </button>
   );
 }

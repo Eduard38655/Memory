@@ -3,328 +3,260 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --font-main: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  --card-size: 150px;
+  --card-padding: 20px;
+  --card-radius: 5px;
+  --box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Dark */
+[data-theme="dark"] {
+  --bg: #0c0a09;
+  --front-bg: #f4fbf6;
+  --card-bg: #d7b117;
+  --card-hover: #facc15;
+  --text-color: white;
+  --estado-border: #292524;
+  --button-color: white;
+}
+
+/* light */
+[data-theme="light"] {
+  --bg: #e8f3eb;
+  --front-bg: #303632;
+  --card-bg: #28af60;
+  --card-hover: #1cce66;
+  --text-color: #303632;
+  --estado-border: #292524;
+  --button-color: #303632;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  background: var(--bg);
+}
+
+.Main_Container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+article {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 20px;
+}
 .No_Display {
   display: none;
 }
-body {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
- justify-content: center;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-}
-.Main_Container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-     align-items: center;
- justify-content: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-  padding: 20px;
-  gap: 25px;
-}
-article {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-template-rows: repeat(4, auto);
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.Container_Carts {
-  width: auto;
-  height: auto;
-  border-radius: 5px;
-  box-shadow:
-    0 4px 6px -1px rgb(0 0 0 / 0.1),
-    0 2px 4px -2px rgb(0 0 0 / 0.1);
-  transition: 0.3s ease-in-out;
-  scale: 1;
-}
+/* ---------- Cards ---------- */
 
+.Fronted,
 .display {
-  width: 150px;
-  height: 150px;
-  text-align: center;
+  width: var(--card-size);
+  height: var(--card-size);
+  border-radius: var(--card-radius);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: var(--card-padding);
+  box-sizing: border-box;
 }
+.matched_Carts {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.Container_Carts {
+  background-color: var(--card-bg);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  border-radius: 5px;
+}
+.Container_Carts:hover {
+  background-color: var(--card-hover);
+  transform: scale(1.02);
+}
+
+.Fronted,
+.matched_Carts {
+  background-color: var(--front-bg);
+}
+
+.display img,
+.Fronted img,
+.matched_Carts img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
 .Div_Estado {
   width: 100%;
-  height: auto;
   display: flex;
-  flex-direction: row;
   gap: 10px;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  border-radius: 5px;
+  border-radius: var(--card-radius);
+  color: var(--text-color);
+  border: 1px solid var(--estado-border);
 }
 .Div_Estado .Reset_Button {
-  font-size: 15px;
-  width: auto;
-  height: auto;
-  padding: 20px;
-  background: none;
-  color: #303632;
   font-weight: 500;
-  border: none;
-  font-size: 15px;
-  cursor: pointer;
-}
-.display {
-  width: 150px;
-  height: 150px;
-  cursor: pointer;
-}
-.display img {
-  width: 90px;
-  height: 90px;
-}
-/*
-@media (max-width: 600px) {
-  body {
-    width: auto;
-    height: auto;
-    font-size: 17px;
-  }
-
-  article {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-template-rows: repeat(3, auto);
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .display {
-    width: 80px;
-    height: 80px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@media (min-width: 1024px) {
-  article {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-template-rows: repeat(4, auto);
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .display {
-    width: 150px;
-    height: 130px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .display img {
-    width: 90px;
-    height: 90px;
-    cursor: pointer;
-  }
-}
-*/ /*
-@media (min-width: 1440px) {
-  article {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-template-rows: repeat(4, auto);
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .display {
-    width: 150px;
-    height: 130px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .display img {
-    width: 90px;
-    height: 90px;
-    cursor: pointer;
-  }
-}*/ /*
-@media (min-width: 600px) {
-  article {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-template-rows: repeat(4, auto);
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .display {
-    width: 150px;
-    height: 130px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .display img {
-    width: 90px;
-    height: 90px;
- 
-     user-select: none;  
-  pointer-events: none;
-  cursor: pointer;
-  }
-}*/
-
-[data-theme="dark"] body {
-  background: #0c0a09;
-}
-.Container_Carts .Fronted {
-  width: 150px;
-  height: 150px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 5px;
-  padding: 10px;
-}
-[data-theme="dark"] .Fronted {
-  background-color: #f4fbf6;
-}
-
-[data-theme="dark"] .Container_Carts {
-  background-color: #d7b117;
-}
-[data-theme="dark"] .Container_Carts:hover {
-  background-color: #facc15;
-  border-radius: 5px;
-  transition: 0.3s ease-in-out;
-  scale: 1;
-}
-[data-theme="dark"] .Div_Estado .Reset_Button {
-  color: white;
-}
-
-[data-theme="dark"] .matched_Carts {
-  width: 150px;
-  height: 150px;
-  background-color: #f4fbf6;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-[data-theme="dark"] .Div_Estado {
-  color: white;
-  border: 1px solid #292524;
-}
-
-[data-theme="dark"] .Button_Change_theme {
-  font-size: 20px;
-  border: none;
+  height: 50px;
+  padding: 5px;
   background: none;
-  color: white;
+  border: none;
   cursor: pointer;
-}
-
-[data-theme="llight"] body {
-  background: #e8f3eb;
-}
-.Container_Carts .Fronted {
-  width: 150px;
-  height: 150px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 5px;
-  padding: 10px;
-}
-[data-theme="light"] .Fronted {
-  background-color: #303632;
-}
-
-[data-theme="light"] .Container_Carts {
-  background-color: #28af60;
-}
-[data-theme="light"] .Container_Carts:hover {
-  background-color: #1cce66;
-  border-radius: 5px;
-  transition: 0.3s ease-in-out;
-  scale: 1;
+  color: var(--button-color);
+  font-size: 15px;
 }
 
 i {
   margin-right: 10px;
   font-size: 17px;
 }
-[data-theme="light"] .matched_Carts {
-  width: 150px;
-  height: 150px;
-  background-color: #303632;
-  border-radius: 5px;
-  padding: 10px;
-}
 
-[data-theme="light"] .Div_Estado {
-  color: #303632;
-  border: 1px solid #292524;
-}
-
-[data-theme="light"] .Button_Change_theme {
-  font-size: 20px;
-  border: none;
-  background: none;
-  color: #303632;
-  cursor: pointer;
-}
-
-
-.Display_State{
-
-  width: 100%;
-  height: 100%;
-   
- background-color: rgba(0, 0, 0, 0.576);
+/* ---------- Estado ---------- */
+.Display_State {
   position: absolute;
-  z-index: 9999999;
-    display: flex;
-  align-items: center;
-  justify-items: center;
-}
- 
-.Display_State .Box{
-   width:100%;
-  height: 100%;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
- flex-direction: column;
- font-size: 15px;
- gap: 15px;
- color: white;
-} 
-.Display_State .Box button{
-  width: auto;
-  height: auto;
-  padding: 10px;
-  font-size: 17px;
+  background-color: rgba(0, 0, 0, 0.576);
+  z-index: 9999999;
+}
+.Display_State .Box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: var(--text-color);
+}
+.Display_State img {
+  width: 200px;
+  height: 200px;
+}
+.Display_State p {
   font-weight: 550;
-  border-radius: 5px;
+  font-size: 17px;
+}
+button {
   border: none;
+  background: none;
+  color: var(--button-color);
   cursor: pointer;
 }
-.Display_State img{
- width: 200px;
- height: 200px;
+/*  MOVILES */
 
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+
+  article {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .Container_Carts {
+    width: 105px;
+    height: 105px;
+  }
+  .Fronted,
+  .matched_Carts,
+  .display {
+    width: 105px;
+    height: 105px;
+    padding: 10px;
+  }
+
+  .display img,
+  .Fronted img,
+  .matched_Carts img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .Div_Estado {
+    flex-direction: row;
+    gap: 8px;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+  }
+  i {
+    font-size: 14px;
+  }
+  .Reset_Button {
+    height: 40px;
+    font-size: 14px;
+    color: white;
+  }
 }
-.Display_State p{
-font-weight: 550;
-  font-size: 17px;
+
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 16px;
+  }
+
+  article {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .Fronted,
+  .matched_Carts,
+  .display {
+    width: 105px;
+    height: 105px;
+    padding: 10px;
+  }
+
+  .display img,
+  .Fronted img,
+  .matched_Carts img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* TABLETS */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  article {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .Container_Carts,
+  .Fronted,
+  .matched_Carts,
+  .display {
+    width: 120px;
+    height: 120px;
+  }
+
+  .display img {
+    width: 80px;
+    height: 80px;
+  }
 }

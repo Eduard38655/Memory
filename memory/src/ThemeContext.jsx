@@ -5,7 +5,7 @@ const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState("dark");
 
-  // Cambiar el color del body según el tema
+  // Cambiar el color de los elementos
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
