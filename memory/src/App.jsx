@@ -138,7 +138,7 @@ function App() {
 
           </>)}
 
-          <button onClick={StarGame}><i className="fa-solid fa-arrow-rotate-right"></i>Play Again</button>
+          <button onClick={StarGame} className={Styles.Try_Buttons}><i className="fa-solid fa-arrow-rotate-right"></i>Play Again</button>
 
         </div>
       </div>
